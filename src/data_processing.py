@@ -99,7 +99,7 @@ class DataProcessing:
             smote = SMOTE(random_state=42)
             self.X_resampled, self.y_resampled = smote.fit_resample(X, y)
 
-            logger.info("Handled class imbalance successfully using SMOTE.")
+            logger.info("Handled class imbalance successfully using SMOTE Technique.")
         except Exception as e:
             logger.error(f"Error while handling imbalanced data: {e}")
             raise CustomException(str(e))

@@ -9,3 +9,11 @@ airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
+venv/
+logs/
+tests/
+plugins/
+MLOPS_SURVIVERFLOW.egg-info/
+include/
+.astro/
+include/*.json
