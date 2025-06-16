@@ -1,0 +1,5 @@
+2025-06-14 14:43:28,134 - INFO - Data Ingestion Pipleine Started..../
+2025-06-14 14:43:32,146 - INFO - Database connection established...
+2025-06-14 14:43:32,992 - INFO - Data extracted from DB
+2025-06-14 14:43:33,379 - INFO - Data Splitting and saving done
+2025-06-14 14:43:33,379 - INFO - End of Data Ingestion Pipline..

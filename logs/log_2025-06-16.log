@@ -1,0 +1,24 @@
+2025-06-16 11:13:35,739 - INFO - Data Ingestion Pipleine Started..../
+2025-06-16 11:13:38,344 - INFO - Database connection established...
+2025-06-16 11:13:39,469 - INFO - Data extracted from DB
+2025-06-16 11:13:39,564 - INFO - Data Splitting and saving done
+2025-06-16 11:13:39,564 - INFO - End of Data Ingestion Pipline..
+2025-06-16 11:13:39,565 - INFO - Your Data Processing is initialized...
+2025-06-16 11:13:39,565 - INFO - Starting the data processing pipeline...
+2025-06-16 11:13:39,726 - INFO - Successfully loaded the data
+2025-06-16 11:13:39,936 - INFO - Data preprocessing completed.
+2025-06-16 11:13:40,023 - INFO - Handled class imbalance successfully using SMOTE.
+2025-06-16 11:13:45,458 - INFO - Features have been stored in Redis Feature Store.
+2025-06-16 11:13:45,460 - INFO - Data processing pipeline completed successfully.
+2025-06-16 11:13:45,461 - INFO - Model Training initialized...
+2025-06-16 11:13:45,461 - INFO - Starting Model Training Pipeline...
+2025-06-16 11:13:45,490 - INFO - Extracting data from Redis
+2025-06-16 11:13:48,067 - INFO - Extracting data from Redis
+2025-06-16 11:13:48,579 - INFO - Index(['Age', 'Fare', 'Pclass', 'Sex', 'Embarked', 'Familysize', 'Isalone',
+       'HasCabin', 'Title', 'Pclass_Fare', 'Age_Fare'],
+      dtype='object')
+2025-06-16 11:13:48,583 - INFO - Preparation for Model Training completed
+2025-06-16 11:14:44,261 - INFO - Best parameters: {'n_estimators': 300, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_depth': 10}
+2025-06-16 11:14:44,470 - INFO - Accuracy is: 0.7762237762237763
+2025-06-16 11:14:44,555 - INFO - Model saved at artifacts/models/random_forest_model.pkl
+2025-06-16 11:14:44,558 - INFO - Model Training pipeline completed successfully.
