@@ -1,14 +1,20 @@
 import redis
 import json
+import os  # To read environment variables
 
 
 class RedisFeatureStore:
-    def __init__(self, host="localhost", port=6379, db=0):
+    def __init__(self, host=None, port=6379, db=0):
+        # Use environment variable if provided, else fallback to localhost
+        self.host = host or os.getenv("REDIS_HOST", "localhost")
+        self.port = port
+        self.db = db
+
         # Initialize Redis client connection
         self.client = redis.StrictRedis(
-            host=host,
-            port=port,
-            db=db,
+            host=self.host,
+            port=self.port,
+            db=self.db,
             decode_responses=True,  # Ensures responses are returned as strings (not bytes)
         )
 
@@ -36,17 +42,11 @@ class RedisFeatureStore:
     def get_batch_features(self, entity_ids):
         batch_features = {}
         for entity_id in entity_ids:
-            batch_features[entity_id] = self.get_features(
-                entity_id
-            )  # Fetch each entity's features
+            batch_features[entity_id] = self.get_features(entity_id)
         return batch_features
 
     # Get all entity IDs currently stored in Redis
     def get_all_entity_ids(self):
-        keys = self.client.keys(
-            "entity:*:features"
-        )  # Match all keys following the entity pattern
-
-        # Extract the entity_id from each key (format: entity:<id>:features)
-        entity_ids = [key.split(":")[1] for key in keys]
+        keys = self.client.keys("entity:*:features")
+        entity_ids = [key.split(":")[1] for key in keys]  # Extract entity ID
         return entity_ids

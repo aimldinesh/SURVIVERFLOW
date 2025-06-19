@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: survivorflow-app
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: REDIS_HOST
+        fromService:
+          name: survivorflow-redis
+          type: redis
+          property: host
+
+  - type: redis
+    name: survivorflow-redis
+    plan: free
