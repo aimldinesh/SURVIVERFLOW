@@ -1,7 +1,7 @@
 # === Import Required Libraries ===
 import pickle  # For loading the pre-trained model
-import numpy as np  # Numerical operations
-import pandas as pd  # Data manipulation
+import numpy as np
+import pandas as pd
 from flask import Flask, render_template, request, jsonify  # Web framework utilities
 from alibi_detect.cd import KSDrift  # KSDrift for concept/data drift detection
 from src.feature_store import (
