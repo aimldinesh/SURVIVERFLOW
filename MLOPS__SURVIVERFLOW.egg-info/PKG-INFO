@@ -2,12 +2,15 @@ Metadata-Version: 2.4
 Name: MLOPS--SURVIVERFLOW
 Version: 0.1
 Author: Dinesh
-Requires-Dist: numpy
 Requires-Dist: pandas
+Requires-Dist: numpy
 Requires-Dist: setuptools
 Requires-Dist: psycopg2
 Requires-Dist: scikit-learn
 Requires-Dist: imbalanced-learn
 Requires-Dist: redis
+Requires-Dist: flask
+Requires-Dist: alibi-detect
+Requires-Dist: prometheus_client
 Dynamic: author
 Dynamic: requires-dist
