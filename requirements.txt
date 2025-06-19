@@ -1,11 +1,23 @@
+# Core
+flask
+gunicorn
+
+# ML / Data
 pandas
 numpy
-gunicorn
-setuptools
-psycopg2
 scikit-learn
 imbalanced-learn
-redis
-flask
 alibi-detect
+
+# Redis support (local & cloud)
+redis
+
+# Monitoring
 prometheus_client
+
+# For environment variable management
+python-dotenv
+
+# Deployment utilities
+setuptools
+psycopg2
