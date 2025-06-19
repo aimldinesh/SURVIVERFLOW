@@ -3,7 +3,7 @@ import json
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file (only in local/dev)
+# Load environment variables from .env file (in dev/local)
 load_dotenv()
 
 
@@ -15,22 +15,28 @@ class RedisFeatureStore:
 
         try:
             if redis_url:
-                # Use Redis cloud URL (e.g., Upstash on Render)
+                # If URL starts with rediss:// use TLS (for Upstash or Render secret)
                 self.client = redis.StrictRedis.from_url(
                     redis_url, decode_responses=True
                 )
+                print("[Redis] Connected via REDIS_URL (TLS if rediss://)")
             else:
-                # Use local Redis (e.g., Docker Redis)
+                # Local Redis (usually no TLS)
                 self.client = redis.StrictRedis(
-                    host=redis_host, port=redis_port, db=0, decode_responses=True
+                    host=redis_host,
+                    port=redis_port,
+                    db=0,
+                    decode_responses=True,
+                    ssl=False,
                 )
+                print("[Redis] Connected via host/port")
 
-            # Optional: test connection
+            # Test connection
             self.client.ping()
-            print("[Redis] Connected successfully")
+            print("[Redis] Connection successful")
 
         except redis.ConnectionError as e:
-            raise ConnectionError(f"[Redis] Failed to connect: {e}")
+            raise ConnectionError(f"[Redis] Connection failed: {e}")
 
     def store_features(self, entity_id, features):
         key = f"entity:{entity_id}:features"
