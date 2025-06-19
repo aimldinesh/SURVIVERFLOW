@@ -3,24 +3,34 @@ import json
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+# Load environment variables from .env file (only in local/dev)
 load_dotenv()
 
 
 class RedisFeatureStore:
     def __init__(self):
-        redis_url = os.getenv("REDIS_URL", None)
+        redis_url = os.getenv("REDIS_URL")
         redis_host = os.getenv("REDIS_HOST", "localhost")
         redis_port = int(os.getenv("REDIS_PORT", 6379))
 
-        if redis_url:
-            # Cloud (e.g. Upstash on Render)
-            self.client = redis.StrictRedis.from_url(redis_url, decode_responses=True)
-        else:
-            # Local Docker Redis
-            self.client = redis.StrictRedis(
-                host=redis_host, port=redis_port, db=0, decode_responses=True
-            )
+        try:
+            if redis_url:
+                # Use Redis cloud URL (e.g., Upstash on Render)
+                self.client = redis.StrictRedis.from_url(
+                    redis_url, decode_responses=True
+                )
+            else:
+                # Use local Redis (e.g., Docker Redis)
+                self.client = redis.StrictRedis(
+                    host=redis_host, port=redis_port, db=0, decode_responses=True
+                )
+
+            # Optional: test connection
+            self.client.ping()
+            print("[Redis] Connected successfully")
+
+        except redis.ConnectionError as e:
+            raise ConnectionError(f"[Redis] Failed to connect: {e}")
 
     def store_features(self, entity_id, features):
         key = f"entity:{entity_id}:features"
@@ -29,9 +39,7 @@ class RedisFeatureStore:
     def get_features(self, entity_id):
         key = f"entity:{entity_id}:features"
         features = self.client.get(key)
-        if features:
-            return json.loads(features)
-        return None
+        return json.loads(features) if features else None
 
     def store_batch_features(self, batch_data):
         for entity_id, features in batch_data.items():

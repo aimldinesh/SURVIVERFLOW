@@ -5,12 +5,5 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: REDIS_HOST
-        fromService:
-          name: survivorflow-redis
-          type: redis
-          property: host
-
-  - type: redis
-    name: survivorflow-redis
-    plan: free
+      - key: REDIS_URL
+        sync: false  # Value will be added manually via Render Dashboard
