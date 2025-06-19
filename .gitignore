@@ -25,7 +25,7 @@ env/
 Thumbs.db
 
 # Flask/ML Logs
-logs/
+logs
 *.log
 
 # Redis/Database
@@ -51,6 +51,7 @@ MLOPS__SURVIVERFLOW.egg-info/
 
 # Tests (if not to be tracked)
 tests/
+dags
 
 # Git itself
 .git/
