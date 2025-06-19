@@ -108,7 +108,7 @@ def get_import_errors():
         def strip_path_prefix(path):
             return os.path.relpath(path, os.environ.get("AIRFLOW_HOME"))
 
-        # Initialize an empty list to store the tuples
+        # Initialize  empty list to store the tuples
         result = []
 
         # Iterate over the items in import_errors
