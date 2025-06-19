@@ -1,19 +1,56 @@
-.git
-.env
-.DS_Store
-airflow_settings.yaml
+# Python
 __pycache__/
-astro
-.venv
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter/IPython
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# System
+Thumbs.db
+
+# Flask/ML Logs
+logs/
+*.log
+
+# Redis/Database
+*.db
+airflow.db
+
+# Airflow
+airflow_settings.yaml
+airflow.cfg
 airflow-webserver.pid
 webserver_config.py
-airflow.cfg
-airflow.db
-venv/
-logs/
-tests/
-plugins/
-MLOPS__SURVIVERFLOW.egg-info
-include/
 .astro/
+include/
 include/*.json
+plugins/
+
+# Astro/MLOps
+astro/
+MLOPS__SURVIVERFLOW.egg-info/
+
+# Env files
+.env
+
+# Tests (if not to be tracked)
+tests/
+
+# Git itself
+.git/
