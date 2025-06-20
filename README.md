@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 
-SurvivorFlow is a production-grade MLOps project that predicts Titanic passenger survival using a fully automated ML pipeline integrated with monitoring, drift detection, a feature store, and deployment on Render with Redis and Prometheus.
+SurvivorFlow is a production-grade MLOps project that predicts passenger survival using a fully automated ML pipeline integrated with monitoring, drift detection, a feature store, and deployment on Render with Redis and Prometheus.
 
 ---
 
