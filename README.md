@@ -1,4 +1,4 @@
-# 🚀 SurvivorFlow – End-to-End MLOps Pipeline for Titanic Survival Prediction
+# 🚀 SurvivorFlow – End-to-End MLOps Pipeline for Survival Prediction
 
 SurvivorFlow is a production-grade MLOps project that predicts Titanic passenger survival using a fully automated ML pipeline integrated with monitoring, drift detection, a feature store, and deployment on Render with Redis and Prometheus.
 
