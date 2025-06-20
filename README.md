@@ -174,6 +174,16 @@ Below is a glimpse of the live prediction form from the deployed SurvivorFlow ap
 ![Prediction Negative](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Prediction_output/Not_Survive.PNG)
 
 ---
+### 📊 Grafana Dashboard – Drift Monitoring
+
+Visual representation of real-time drift monitoring using Grafana and Prometheus:
+
+![Grafana Drift Dashboard](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_drift_count.PNG)
+![Grafana Drift Dashboard](https://github.com/aimldinesh/SURVIVERFLOW/blob/main/Images/Grafana/grafana_prediction_count.PNG)
+![Grafana Drift Dashboard](https://github.com/aimldinesh/SURVIVERFLOW/blob/main/Images/Grafana/grafana_drift_count_graph_2.PNG)
+![Grafana Drift Dashboard](https://github.com/aimldinesh/SURVIVERFLOW/blob/main/Images/Grafana/grafana_prediction_count_graph_2.PNG)
+
+---
 
 ## 📣 Acknowledgements
 
