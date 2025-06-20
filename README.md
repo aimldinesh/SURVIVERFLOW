@@ -165,6 +165,15 @@ Access at `/metrics` endpoint.
 ---
 ### 🖼️ Live Prediction Interface
 
+Below is a glimpse of the live prediction form from the deployed SurvivorFlow application:
+
+#### ✅ Prediction Result: **Likely to Survive**
+![Prediction Positive](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Prediction_output/Survive.PNG)
+
+#### ❌ Prediction Result: **Likely to Not Survive**
+![Prediction Negative](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Prediction_output/Not_Survive.PNG)
+
+---
 
 ## 📣 Acknowledgements
 
