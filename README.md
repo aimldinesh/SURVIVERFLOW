@@ -58,7 +58,7 @@ graph TD
   J --> K[Drift Detection - Alibi]
   J --> L[Prometheus /metrics]
   L --> M[Grafana Dashboard]
-
+```
 
 ## 📌 Key Features
 
