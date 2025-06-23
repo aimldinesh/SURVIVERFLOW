@@ -13,6 +13,52 @@
 SurvivorFlow is a production-grade MLOps project that predicts passenger survival using a fully automated ML pipeline integrated with monitoring, drift detection, a feature store, and deployment on Render with Redis and Prometheus.
 
 ---
+# 🚢 SurvivorFlow — End-to-End MLOps Pipeline for Titanic Survival Prediction
+
+[![Render Live](https://img.shields.io/badge/Live-Demo-blue?style=flat-square&logo=render)](https://surviverflow-1.onrender.com)
+[![GitHub Repo stars](https://img.shields.io/github/stars/yourusername/survivorflow?style=social)](https://github.com/yourusername/survivorflow)
+[![Docker](https://img.shields.io/badge/Dockerized-%231572B6.svg?logo=docker&logoColor=white)](https://www.docker.com/)
+[![MLOps](https://img.shields.io/badge/MLOps-Production--Ready-green)]()
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+> A lightweight but production-style MLOps pipeline — from PostgreSQL to Redis-powered feature store, real-time Flask API, drift detection with Alibi, and monitoring with Prometheus + Grafana.
+
+---
+
+## 🧠 Overview
+
+**SurvivorFlow** is an end-to-end MLOps system designed around the classic Titanic dataset. It simulates real-world workflows including:
+
+- ⛏ Data Ingestion from PostgreSQL
+- 🧼 Preprocessing + Feature Engineering
+- 📦 Redis Feature Store for consistent training/inference
+- 🤖 Model Training + Hyperparameter Tuning
+- 🔮 Real-Time Predictions via Flask API
+- 📈 Drift Detection with Alibi
+- 📊 Monitoring with Prometheus + Grafana
+- 🐳 Dockerized + Deployed on [Render](https://render.com/)
+
+---
+
+## 📊 Architecture
+
+```mermaid
+graph TD
+  A[GCS Bucket] -->|CSV| B[Airflow DAG]
+  B --> C[PostgreSQL]
+  C --> D[Data Ingestion Script]
+  D --> E[Train/Test CSVs]
+  E --> F[Data Processing & Feature Engineering]
+  F --> G[Redis Feature Store]
+  G --> H[Model Training]
+  H --> I[Model.pkl]
+  I --> J[Flask API]
+  G --> J
+  J -->|/predict| UserInput[User Form]
+  J --> K[Drift Detection - Alibi]
+  J --> L[Prometheus /metrics]
+  L --> M[Grafana Dashboard]
+
 
 ## 📌 Key Features
 
