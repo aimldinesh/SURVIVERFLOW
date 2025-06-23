@@ -27,8 +27,23 @@ SurviverFlow is a **production-ready MLOps pipeline** that predicts Titanic pass
 ---
 
 ## 🧱 Architecture Overview
-
-![SurvivorFlow MLOps Architecture](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/architecture/SurvivorFlow_Architecture.png)
+```mermaid
+graph TD
+  A[GCS Bucket] -->|CSV| B[Airflow DAG]
+  B --> C[PostgreSQL]
+  C --> D[Data Ingestion Script]
+  D --> E[Train/Test CSVs]
+  E --> F[Data Processing & Feature Engineering]
+  F --> G[Redis Feature Store]
+  G --> H[Model Training]
+  H --> I[Model.pkl]
+  I --> J[Flask API]
+  G --> J
+  J -->|/predict| UserInput[User Form]
+  J --> K[Drift Detection - Alibi]
+  J --> L[Prometheus /metrics]
+  L --> M[Grafana Dashboard]
+```
 
 ---
 
