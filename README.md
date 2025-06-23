@@ -1,4 +1,4 @@
-## 🚀 SurviverFlow – End-to-End MLOps Pipeline for Survival Prediction
+# 🚀 SurvivorFlow – End-to-End MLOps Pipeline for Survival Prediction
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-Web_App-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
@@ -9,21 +9,26 @@
 [![Render](https://img.shields.io/badge/Deployed-Render-success?logo=render)](https://surviverflow-1.onrender.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-
-SurviverFlow is a production-grade MLOps project that predicts passenger survival using a fully automated ML pipeline integrated with monitoring, drift detection, a feature store, and deployment on Render with Redis and Prometheus.
+SurvivorFlow is a **production-ready MLOps pipeline** that predicts Titanic passenger survival with a fully automated workflow — covering everything from data ingestion to deployment, drift detection, monitoring, and feature storage.
 
 ---
 
 ## 📌 Key Features
 
 - ✅ Data Ingestion from GCP → PostgreSQL via Airflow
-- 🔧 ETL Pipeline with custom DAGs
-- 🧠 Model Training using Scikit-learn
-- ⚙️ Feature Store built with Redis (Docker/Upstash)
-- 📊 Drift Detection via Alibi-Detect (KSDrift)
-- 📈 Real-time Monitoring using Prometheus + Grafana
-- 🌐 Flask App for Live Predictions
-- 🚀 Deployed on Render with Redis integration
+- 🔧 ETL Pipeline with Airflow DAG
+- 🧠 Model Training with Hyperparameter Tuning
+- ⚙️ Feature Store using Redis (local & cloud)
+- 📊 Drift Detection via Alibi-Detect
+- 📈 Monitoring using Prometheus + Grafana
+- 🌐 Real-time Flask Web App
+- 🐳 Dockerized & Deployed on Render
+
+---
+
+## 🧱 Architecture Overview
+
+![SurvivorFlow MLOps Architecture](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/architecture/SurvivorFlow_Architecture.png)
 
 ---
 
@@ -56,65 +61,75 @@ SURVIVERFLOW-main
 
 ---
 
-## 🔄 End-to-End Pipeline Overview
-
-### 1️⃣ **Data Engineering**
-- Raw CSV uploaded to **GCP Bucket**
-- **Airflow DAG** extracts → transforms → loads into **PostgreSQL**
-- Verified in **Jupyter notebook**
-
-### 2️⃣ **Feature Store (Redis)**
-- Built Redis-based store for batch + real-time
-- Integrated with both local Redis (Docker) and Upstash (Render cloud Redis)
-
-### 3️⃣ **Model Training**
-- Preprocessed data using `StandardScaler`
-- Trained **Random Forest Classifier**
-- Features: Age, Fare, Pclass, Title, etc.
-- Saved model to `artifacts/models/`
-
-### 4️⃣ **Flask App + Inference**
-- User inputs handled via `Flask`
-- Features scaled → Drift checked → Prediction made
-- Result shown on `/` route with styling
-
-### 5️⃣ **Drift Detection**
-- Implemented **KSDrift (Alibi-Detect)**
-- Compares live data to historical reference
-- Triggers **Prometheus counter** if drift is detected
-
-### 6️⃣ **Monitoring with Prometheus + Grafana**
-- Exposes `/metrics` endpoint
-- Tracks:
-  - Prediction count
-  - Drift count
-- Grafana dashboard can be linked
-
-### 7️⃣ **Deployment on Render**
-- Dockerized using custom `Dockerfile`
-- App hosted on [🌐 https://surviverflow-1.onrender.com](https://surviverflow-1.onrender.com)
-- Uses `.env` for secrets like `REDIS_URL`
 
 ---
-### 🖼️ Live Prediction Interface
 
-Below is a glimpse of the live prediction form from the deployed SurvivorFlow application:
+## 🔄 MLOps Pipeline Breakdown
 
-#### ✅ Prediction Result: **Likely to Survive**
-![Prediction Positive](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Prediction_output/Survive.PNG)
+### 🧮 Step 1: Data Ingestion
 
-#### ❌ Prediction Result: **Likely to Not Survive**
-![Prediction Negative](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Prediction_output/Not_Survive.PNG)
+- Extract CSV from GCS Bucket
+- Use Airflow DAG to load data into PostgreSQL
+- Validated schema + nulls
+
+### 🗃️ Step 2: Feature Store with Redis
+
+- Built a Redis-based store for storing ML features
+- Batch + individual read/write support
+- Used both Docker Redis (local) and Upstash (Render)
+
+### 🧼 Step 3: Data Preprocessing
+
+- Handled missing values (Age, Fare, Embarked)
+- Applied Label Encoding
+- Feature Engineered: Title, FamilySize, HasCabin
+- Used SMOTE for class balancing
+- Stored all features in Redis via `entity_id`
+
+### 🧠 Step 4: Model Training
+
+- Fetched data from Redis, not CSV
+- Trained `RandomForestClassifier` with `RandomizedSearchCV`
+- Evaluated using accuracy + confusion matrix
+- Saved model as `random_forest_model.pkl`
+
+### 🔮 Step 5: Real-Time Prediction + Drift Detection
+
+- Flask `/predict` accepts form input
+- Loads saved model, scales features
+- Alibi-Detect `KSDrift` compares with reference
+- Logs drift if detected and updates Prometheus counters
+
+### 📊 Step 6: Monitoring
+
+- Prometheus `/metrics` endpoint tracks:
+  - `prediction_count`
+  - `drift_count`
+- Grafana dashboards visualize drift and usage
+
+### 🚀 Step 7: Deployment with Docker + Render
+
+- Built Docker image with Gunicorn serving Flask
+- `render.yml` defines container deployment
+- Uses Upstash Redis URL via Render secrets
 
 ---
-### 📊 Grafana Dashboard – Drift Monitoring
 
-Visual representation of real-time drift monitoring using Grafana and Prometheus:
+## 🖼️ Live Web App Interface
 
-![Grafana Drift Dashboard](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_drift_count.PNG)
-![Grafana Drift Dashboard](https://github.com/aimldinesh/SURVIVERFLOW/blob/main/Images/Grafana/grafana_prediction_count.PNG)
-![Grafana Drift Dashboard](https://github.com/aimldinesh/SURVIVERFLOW/blob/main/Images/Grafana/grafana_drift_count_graph_2.PNG)
-![Grafana Drift Dashboard](https://github.com/aimldinesh/SURVIVERFLOW/blob/main/Images/Grafana/grafana_prediction_count_graph_2.PNG)
+### ✅ Likely to Survive  
+![Survive](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Prediction_output/Survive.PNG)
+
+### ❌ Likely to Not Survive  
+![Not Survive](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Prediction_output/Not_Survive.PNG)
+
+---
+
+## 📊 Monitoring via Grafana
+
+![Drift Count](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_drift_count.PNG)
+![Prediction Count](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_prediction_count.PNG)
+![Drift Graph](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_drift_count_graph_2.PNG)
 
 ---
 
@@ -124,40 +139,31 @@ Visual representation of real-time drift monitoring using Grafana and Prometheus
 |----------------|------------------------------------------|
 | Data Storage   | GCP Bucket, PostgreSQL                   |
 | Orchestration  | Airflow (Astro CLI)                      |
-| Model Training | Scikit-learn, Pandas, Numpy              |
+| ML Training    | Scikit-learn, Pandas, Numpy              |
 | Feature Store  | Redis (Docker + Upstash)                 |
 | Drift Detect   | Alibi-Detect (KSDrift)                   |
 | Monitoring     | Prometheus + Grafana                     |
 | App Layer      | Flask, HTML                              |
-| Deployment     | Render, Docker                           |
+| Deployment     | Docker, Render                           |
 
 ---
 
 ## 🔧 How to Run Locally
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/aimldinesh/SURVIVERFLOW.git
-   cd MLOPS-SURVIVERFLOW-PROJECT
-   ```
+```bash
+# 1. Clone the Repo
+git clone https://github.com/aimldinesh/SURVIVERFLOW.git
+cd SURVIVERFLOW
 
-2. Create `.env` file:
-   ```
-   REDIS_URL=your_upstash_redis_url
-   ```
+# 2. Set Redis URL in .env
+echo "REDIS_URL=your_upstash_redis_url" > .env
 
-3. Run locally (Flask only):
-   ```bash
-   python app.py
-   ```
+# 3. Run Flask App Locally
+python app.py
 
-4. OR use Docker:
-   ```bash
-   docker build -t survivorflow-app .
-   docker run -p 5000:5000 survivorflow-app
-   ```
-
----
+# OR Build with Docker
+docker build -t survivorflow-app .
+docker run -p 5000:5000 survivorflow-app
 
 ## 🌍 Deployment (Render)
 
