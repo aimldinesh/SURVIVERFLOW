@@ -1,4 +1,4 @@
-# 🚀 SurvivorFlow – End-to-End MLOps Pipeline for Survival Prediction
+# 🚀 SurviverFlow – End-to-End MLOps Pipeline for Survival Prediction
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-Web_App-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
@@ -9,7 +9,7 @@
 [![Render](https://img.shields.io/badge/Deployed-Render-success?logo=render)](https://surviverflow-1.onrender.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-SurvivorFlow is a **production-ready MLOps pipeline** that predicts Titanic passenger survival with a fully automated workflow — covering everything from data ingestion to deployment, drift detection, monitoring, and feature storage.
+SurviverFlow is a **production-ready MLOps pipeline** that predicts Titanic passenger survival with a fully automated workflow — covering everything from data ingestion to deployment, drift detection, monitoring, and feature storage.
 
 ---
 
