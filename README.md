@@ -6,6 +6,8 @@
 [![Airflow](https://img.shields.io/badge/Airflow-Orchestration-blue?logo=apacheairflow)](https://airflow.apache.org/)
 [![Prometheus](https://img.shields.io/badge/Monitoring-Prometheus-orange?logo=prometheus)](https://prometheus.io/)
 [![Grafana](https://img.shields.io/badge/Grafana-Dashboard-orange?logo=grafana)](https://grafana.com/)
+[![Blog](https://img.shields.io/badge/Read-Blog-blue?logo=medium)](https://medium.com/@dsdineshnitrr/building-surviverflow-an-end-to-end-mlops-pipeline-with-redis-airflow-prometheus-render-b2f3cb341c14)
+
 
 **SurviverFlow** is a scalable, production-ready MLOps pipeline that predicts passenger survival using the survival prediction dataset. It covers the entire ML lifecycle—**data ingestion**, **feature storage**, **model training**, **drift detection**, **deployment**, and **monitoring**—with modern tools like Redis, Airflow, Flask, Prometheus, and Render.
 
@@ -225,6 +227,10 @@ Access at `/metrics` endpoint.
 - Using **Redis as a Feature Store** helped prevent data leakage
 - **Drift Monitoring** with Alibi ensures long-term model reliability
 - **Docker + Render** enabled fast and reproducible CI/CD deployment
+
+📌 Want to learn how this project was built?
+- 📝 I wrote a detailed Medium blog covering the full architecture, tools, and deployment process.
+👉 [Read the blog on Medium](https://medium.com/@dsdineshnitrr/building-surviverflow-an-end-to-end-mlops-pipeline-with-redis-airflow-prometheus-render-b2f3cb341c14)
 
 ### 🛠️ Future Enhancements
 - ✅ CI/CD via **GitHub Actions**
