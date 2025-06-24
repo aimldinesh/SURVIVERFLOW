@@ -9,24 +9,43 @@
 [![Render](https://img.shields.io/badge/Deployed-Render-success?logo=render)](https://surviverflow-1.onrender.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-SurviverFlow is a **production-ready MLOps pipeline** that predicts Titanic passenger survival with a fully automated workflow — covering everything from data ingestion to deployment, drift detection, monitoring, and feature storage.
+**SurviverFlow** is a scalable, production-ready MLOps pipeline that predicts passenger survival using the Titanic dataset. It covers the entire ML lifecycle—**data ingestion**, **feature storage**, **model training**, **drift detection**, **deployment**, and **monitoring**—with modern tools like Redis, Airflow, Flask, Prometheus, and Render.
 
 ---
 
-## 📌 Key Features
+## 📚 Table of Contents
 
-- ✅ Data Ingestion from GCP → PostgreSQL via Airflow
-- 🔧 ETL Pipeline with Airflow DAG
-- 🧠 Model Training with Hyperparameter Tuning
-- ⚙️ Feature Store using Redis (local & cloud)
-- 📊 Drift Detection via Alibi-Detect
-- 📈 Monitoring using Prometheus + Grafana
-- 🌐 Real-time Flask Web App
-- 🐳 Dockerized & Deployed on Render
+- [🔑 Key Features](#-key-features)
+- [🧱 Architecture Overview](#-architecture-overview)
+- [🗂️ Project Structure](#️-project-structure)
+- [⚙️ Tech Stack](#️-tech-stack)
+- [🔄 MLOps Pipeline Breakdown](#-mlops-pipeline-breakdown)
+- [🖼️ Live Web App Interface](#️-live-web-app-interface)
+- [📊 Monitoring via Grafana](#-monitoring-via-grafana)
+- [🔧 How to Run Locally](#-how-to-run-locally)
+- [🌍 Deployment (Render)](#-deployment-render)
+- [📈 Monitoring Metrics](#-monitoring-metrics)
+- [📌 Lessons & Enhancements](#-lessons--enhancements)
+- [🙌 Acknowledgements](#-acknowledgements)
+- [📄 License](#-license)
+
+---
+
+## 🔑 Key Features
+
+- ✅ Automated Data Ingestion (GCP → PostgreSQL via Airflow)
+- ⚙️ Redis Feature Store with real-time + batch support
+- 🧠 Random Forest Classifier with hyperparameter tuning
+- 🧼 Feature Engineering + Class Balancing (SMOTE)
+- 🌐 Flask Web App for Real-Time Inference
+- 🧠 Drift Detection via Alibi-Detect (KSDrift)
+- 📈 Monitoring via Prometheus + Grafana
+- 🐳 Dockerized & CI/CD-ready (Render)
 
 ---
 
 ## 🧱 Architecture Overview
+
 ```mermaid
 graph TD
   A[GCS Bucket] -->|CSV| B[Airflow DAG]
@@ -44,7 +63,6 @@ graph TD
   J --> L[Prometheus /metrics]
   L --> M[Grafana Dashboard]
 ```
-
 ---
 
 ## 🗂️ Project Structure
@@ -76,57 +94,56 @@ SURVIVERFLOW-main
 
 ---
 
+## ⚙️ Tech Stack
+
+| Layer          | Tools Used                              |
+|----------------|------------------------------------------|
+| Data Source    | GCP Bucket, PostgreSQL                   |
+| Workflow Engine| Apache Airflow (Astro CLI)               |
+| Feature Store  |Redis (Local[Docker] + Upstash Cloud)     |
+| Model Traininge| scikit-learn, Pandas, SMOTE              |
+| Drift Detection| Alibi-Detect (KSDrift)                   |
+| Monitoring     | Prometheus + Grafana                     |
+| Serving Layer  | Flask + HTML Templates                   |
+| Deployment     | Docker, Render                           |
 
 ---
 
 ## 🔄 MLOps Pipeline Breakdown
 
 ### 🧮 Step 1: Data Ingestion
-
-- Extract CSV from GCS Bucket
-- Use Airflow DAG to load data into PostgreSQL
-- Validated schema + nulls
+- Load CSV from **GCP Bucket**
+- Airflow DAG writes data into **PostgreSQL**
+- Validates schema and handles **null values**
 
 ### 🗃️ Step 2: Feature Store with Redis
-
-- Built a Redis-based store for storing ML features
-- Batch + individual read/write support
-- Used both Docker Redis (local) and Upstash (Render)
+- Store extracted features in **Redis**
+- Supports both **batch and real-time** access
+- Dual-mode support: **Local Docker** & **Upstash (Cloud Redis)**
 
 ### 🧼 Step 3: Data Preprocessing
-
-- Handled missing values (Age, Fare, Embarked)
-- Applied Label Encoding
-- Feature Engineered: Title, FamilySize, HasCabin
-- Used SMOTE for class balancing
-- Stored all features in Redis via `entity_id`
+- Handle **missing values** (Age, Fare, Embarked)
+- Perform **Label Encoding** and **Feature Engineering**
+- Balance classes using **SMOTE**
 
 ### 🧠 Step 4: Model Training
-
-- Fetched data from Redis, not CSV
-- Trained `RandomForestClassifier` with `RandomizedSearchCV`
-- Evaluated using accuracy + confusion matrix
-- Saved model as `random_forest_model.pkl`
+- Data is fetched directly from **Redis**
+- Trains a **RandomForestClassifier** using **RandomizedSearchCV**
+- Saves the model as `.pkl`
 
 ### 🔮 Step 5: Real-Time Prediction + Drift Detection
-
-- Flask `/predict` accepts form input
-- Loads saved model, scales features
-- Alibi-Detect `KSDrift` compares with reference
-- Logs drift if detected and updates Prometheus counters
+- Flask app exposes `/predict` route for **real-time inference**
+- **Alibi Detect KSDrift** checks for data distribution shift
+- **Prometheus** tracks prediction and drift metrics
 
 ### 📊 Step 6: Monitoring
+- **Prometheus** exposes `/metrics` endpoint
+- **Grafana Dashboards** visualize system usage and drift trends
 
-- Prometheus `/metrics` endpoint tracks:
-  - `prediction_count`
-  - `drift_count`
-- Grafana dashboards visualize drift and usage
-
-### 🚀 Step 7: Deployment with Docker + Render
-
-- Built Docker image with Gunicorn serving Flask
-- `render.yml` defines container deployment
-- Uses Upstash Redis URL via Render secrets
+### 🚀 Step 7: Deployment
+- Fully containerized using **Docker + Gunicorn**
+- **Render** used for one-click deployment
+- Secrets like `REDIS_URL` managed securely via **Render Dashboard**
 
 ---
 
@@ -145,21 +162,6 @@ SURVIVERFLOW-main
 ![Drift Count](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_drift_count.PNG)
 ![Prediction Count](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_prediction_count.PNG)
 ![Drift Graph](https://raw.githubusercontent.com/aimldinesh/SURVIVERFLOW/main/Images/Grafana/grafana_drift_count_graph_2.PNG)
-
----
-
-## ⚙️ Tech Stack
-
-| Layer          | Tools Used                              |
-|----------------|------------------------------------------|
-| Data Storage   | GCP Bucket, PostgreSQL                   |
-| Orchestration  | Airflow (Astro CLI)                      |
-| ML Training    | Scikit-learn, Pandas, Numpy              |
-| Feature Store  | Redis (Docker + Upstash)                 |
-| Drift Detect   | Alibi-Detect (KSDrift)                   |
-| Monitoring     | Prometheus + Grafana                     |
-| App Layer      | Flask, HTML                              |
-| Deployment     | Docker, Render                           |
 
 ---
 
@@ -216,16 +218,32 @@ Access at `/metrics` endpoint.
 
 ---
 
-## 📣 Acknowledgements
+## 📌 Lessons & Enhancements
 
-- Titanic dataset (Kaggle)
-- Render, Upstash, Alibi-Detect
-- OpenAI/ChatGPT guidance for MLOps setup
+### 🔍 Key Learnings
+- Using **Redis as a Feature Store** helped prevent data leakage
+- **Drift Monitoring** with Alibi ensures long-term model reliability
+- **Docker + Render** enabled fast and reproducible CI/CD deployment
+
+### 🛠️ Future Enhancements
+- ✅ CI/CD via **GitHub Actions**
+- ✅ Implement **Feature Versioning**
+- ✅ Add **Retraining Pipelines**
+- ✅ Set up **Slack/Email Alerts** for drift or failure
+- ✅ Integrate **MLflow** for model registry and tracking
 
 ---
 
-## 📌 TODO (Optional Enhancements)
+## 🙌 Acknowledgements
 
-- Add CI/CD with GitHub Actions
-- Add model versioning with DVC or MLflow
-- Schedule retraining pipeline
+- [Titanic Dataset – Kaggle](https://www.kaggle.com/c/titanic)
+- [Render](https://render.com)
+- [Upstash Redis](https://upstash.com/)
+- [Alibi-Detect](https://docs.seldon.io/projects/alibi-detect/)
+- [ChatGPT](https://openai.com/chatgpt) – for architectural guidance
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
