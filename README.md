@@ -6,8 +6,6 @@
 [![Airflow](https://img.shields.io/badge/Airflow-Orchestration-blue?logo=apacheairflow)](https://airflow.apache.org/)
 [![Prometheus](https://img.shields.io/badge/Monitoring-Prometheus-orange?logo=prometheus)](https://prometheus.io/)
 [![Grafana](https://img.shields.io/badge/Grafana-Dashboard-orange?logo=grafana)](https://grafana.com/)
-[![Render](https://img.shields.io/badge/Deployed-Render-success?logo=render)](https://surviverflow-1.onrender.com)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 **SurviverFlow** is a scalable, production-ready MLOps pipeline that predicts passenger survival using the Titanic dataset. It covers the entire ML lifecycle—**data ingestion**, **feature storage**, **model training**, **drift detection**, **deployment**, and **monitoring**—with modern tools like Redis, Airflow, Flask, Prometheus, and Render.
 
