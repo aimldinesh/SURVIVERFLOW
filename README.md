@@ -63,31 +63,32 @@ graph TD
   J --> L[Prometheus /metrics]
   L --> M[Grafana Dashboard]
 ```
+
 ---
 
 ## 🗂️ Project Structure
 
 ```
 SURVIVERFLOW-main
-├── app.py                      # Main Flask app
+├── app.py
 ├── Dockerfile
 ├── README.md
-├── .astro/                     # Astro & Airflow configs
-├── dags/                       # Airflow DAGs
+├── .astro/
+├── dags/
 │   └── extract_data_from_gcp.py
-├── src/                        # Core Python modules
+├── src/
 │   ├── data_ingestion.py
 │   ├── data_processing.py
 │   ├── model_trainer.py
 │   ├── feature_store.py
 │   └── logger.py
-├── pipeline/                   # Training pipeline script
-├── artifacts/                  # Saved model + raw data
-│   ├── models/random_forest_model.pkl
-├── config/                     # Config paths and DB settings
-├── notebook/                   # Jupyter testing
-├── prometheus.yml              # Prometheus config
-├── render.yml                  # Render deployment config
+├── pipeline/
+├── artifacts/
+│   └── models/random_forest_model.pkl
+├── config/
+├── notebook/
+├── prometheus.yml
+├── render.yml
 ├── requirements.txt
 └── setup.py
 ```
@@ -96,16 +97,16 @@ SURVIVERFLOW-main
 
 ## ⚙️ Tech Stack
 
-| Layer          | Tools Used                              |
+| Layer           | Tools Used                              |
 |----------------|------------------------------------------|
-| Data Source    | GCP Bucket, PostgreSQL                   |
-| Workflow Engine| Apache Airflow (Astro CLI)               |
-| Feature Store  |Redis (Local[Docker] + Upstash Cloud)     |
-| Model Traininge| scikit-learn, Pandas, SMOTE              |
-| Drift Detection| Alibi-Detect (KSDrift)                   |
-| Monitoring     | Prometheus + Grafana                     |
-| Serving Layer  | Flask + HTML Templates                   |
-| Deployment     | Docker, Render                           |
+| Data Source     | GCP Bucket, PostgreSQL                   |
+| Workflow Engine | Apache Airflow (Astro CLI)               |
+| Feature Store   | Redis (Local Docker + Upstash Cloud)     |
+| Model Training  | scikit-learn, Pandas, SMOTE              |
+| Drift Detection | Alibi-Detect (KSDrift)                   |
+| Monitoring      | Prometheus, Grafana                      |
+| Serving Layer   | Flask + HTML                             |
+| Deployment      | Docker, Render                           |
 
 ---
 
@@ -181,13 +182,14 @@ python app.py
 # OR Build with Docker
 docker build -t survivorflow-app .
 docker run -p 5000:5000 survivorflow-app
+```
+
+---
 
 ## 🌍 Deployment (Render)
 
-> Render setup with Docker + Redis service
+Render setup with Docker + Redis service:
 
-- Redis connected via `REDIS_URL` from Upstash
-- `render.yml` configured with:
 ```yaml
 services:
   - type: web
