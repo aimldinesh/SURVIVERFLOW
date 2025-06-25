@@ -17,6 +17,7 @@
 
 - [🔑 Key Features](#-key-features)
 - [🧱 Architecture Overview](#-architecture-overview)
+- [📊 MLOps Workflow Diagram](#-mlops-workflow-diagram)
 - [🗂️ Project Structure](#️-project-structure)
 - [⚙️ Tech Stack](#️-tech-stack)
 - [🔄 MLOps Pipeline Breakdown](#-mlops-pipeline-breakdown)
@@ -66,6 +67,35 @@ graph TD
 ```
 
 ---
+## 📊 MLOps Workflow Diagram
+
+```mermaid
+graph TD
+
+  subgraph Setup
+    A[Database Setup]
+    B[Project Setup]
+  end
+
+  subgraph Pipeline
+    C[ETL Pipeline - Airflow]
+    D[Data Ingestion - GCS to PostgreSQL]
+    E[Jupyter Notebook Testing]
+    F[Feature Store Setup - Redis]
+    G[Data Processing and Feature Storing]
+    H[Model Training from Redis]
+    I[Training Pipeline]
+  end
+
+  subgraph Deployment_and_Monitoring
+    J[Data and Code Versioning]
+    K[User App - Flask]
+    L[Data Drift Detection - Alibi]
+    M[ML Monitoring - Prometheus and Grafana]
+  end
+
+  A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M
+```
 
 ## 🗂️ Project Structure
 
