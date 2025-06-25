@@ -1,5 +1,5 @@
 project:
-  name: mlops-surviver-flow-project
+  name: mlops-surviverflow-project
 
 deployments:
   - name: dev

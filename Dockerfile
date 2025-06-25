@@ -1,8 +1,8 @@
-# FROM quay.io/astronomer/astro-runtime:12.6.0
+#FROM quay.io/astronomer/astro-runtime:12.6.0
 
-# RUN pip install apache-airflow-providers-google
+#RUN pip install apache-airflow-providers-google
 
-# Use official Python 3.10 slim image
+#Use official Python 3.10 slim image
 FROM python:3.10-slim
 
 # Set environment variables to improve performance
@@ -13,7 +13,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+ RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     gcc \

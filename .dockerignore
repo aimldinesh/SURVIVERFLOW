@@ -1,8 +1,48 @@
+# Astro & airflow
 astro
-.git
-.env
-airflow_settings.yaml
-logs/
-.venv
+.airflow/
 airflow.db
 airflow.cfg
+airflow_settings.yaml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+.env.*
+.venv/
+
+# Notebooks and logs
+*.ipynb
+logs/
+checkpoints/
+*.log
+
+# Data
+data/
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+*.json
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.onnx
+
+# Output folders (e.g. screenshots, images, predictions)
+Images/
+outputs/
+results/
+screenshots/
+
+# Git
+.git
