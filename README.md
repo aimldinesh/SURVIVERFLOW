@@ -57,13 +57,15 @@ graph TD
   E --> F[Data Processing & Feature Engineering]
   F --> G[Redis Feature Store]
   G --> H[Model Training]
-  H --> I[Model.pkl]
+  H --> I[Trained Model (model.pkl)]
   I --> J[Flask API]
   G --> J
   J -->|/predict| UserInput[User Form]
   J --> K[Drift Detection - Alibi]
-  J --> L[Prometheus /metrics]
+  J --> L[Prometheus Exporter (/metrics)]
   L --> M[Grafana Dashboard]
+  J --> N[Deployment on Render]
+
 ```
 
 ---
@@ -102,28 +104,42 @@ graph TD
 ## 🗂️ Project Structure
 
 ```
-SURVIVERFLOW-main
-├── app.py
-├── Dockerfile
-├── README.md
-├── .astro/
+SURVIVERFLOW/
+├── app.py                        # Main app (Flask/FastAPI)
+├── Dockerfile                    # Docker image setup
+├── README.md                     # Project documentation
+├── requirements.txt              # Python dependencies
+├── setup.py                      # Setup config for packaging
+├── render.yml                    # Render deployment config
+├── prometheus.yml                # Prometheus scraping config
+├── .astro/                       # Astro Airflow config (if applicable)
+│
 ├── dags/
-│   └── extract_data_from_gcp.py
+│   └── extract_data_from_gcp.py  # Airflow DAG for GCP ingestion
+│
 ├── src/
-│   ├── data_ingestion.py
-│   ├── data_processing.py
-│   ├── model_trainer.py
-│   ├── feature_store.py
-│   └── logger.py
-├── pipeline/
-├── artifacts/
-│   └── models/random_forest_model.pkl
-├── config/
-├── notebook/
-├── prometheus.yml
-├── render.yml
-├── requirements.txt
-└── setup.py
+│   ├── data_ingestion.py         # Ingests data from GCP/cloud
+│   ├── data_processing.py        # Cleans and processes data
+│   ├── model_training.py         # ML model training and evaluation
+│   ├── feature_store.py          # Redis-based feature storage
+│   ├── custom_exception.py       # Custom error handling
+│   └── logger.py                 # Centralized logging
+│
+├── pipeline/                     # (Optional) Workflow orchestration logic
+│
+├── artifacts/                    # Generated outputs
+│   ├── models/
+│   │   └── random_forest_model.pkl  # Trained model file
+│   └── raw/
+│       └── data/                 # Raw input data
+│
+├── config/                       # Config files (YAMLs, etc.)
+├── notebook/                     # Jupyter notebooks (EDA, testing)
+│
+├── templates/
+│   └── index.html                # Frontend for web app
+└── static/
+    └── style.css                # Styling for frontend
 ```
 
 ---
