@@ -90,11 +90,13 @@ graph TD
   subgraph Deployment_and_Monitoring
     J[Data and Code Versioning]
     K[User App - Flask]
+    K1[Deployment on Render]
     L[Data Drift Detection - Alibi]
     M[ML Monitoring - Prometheus and Grafana]
   end
 
-  A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M
+  A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> K1 --> L --> M
+
 ```
 
 ## 🗂️ Project Structure
