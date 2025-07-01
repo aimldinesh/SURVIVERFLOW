@@ -46,7 +46,7 @@
 
 ---
 
-## 🧱 Architecture Overview
+### 🧱 Architecture Overview
 
 ```mermaid
 graph TD
@@ -57,17 +57,16 @@ graph TD
   E --> F[Data Processing & Feature Engineering]
   F --> G[Redis Feature Store]
   G --> H[Model Training]
-  H --> I[Trained Model (model.pkl)]
+  H --> I[Model.pkl]
   I --> J[Flask API]
   G --> J
   J -->|/predict| UserInput[User Form]
   J --> K[Drift Detection - Alibi]
-  J --> L[Prometheus Exporter (/metrics)]
+  J --> L[Prometheus /metrics]
   L --> M[Grafana Dashboard]
   J --> N[Deployment on Render]
 
 ```
-
 ---
 ## 📊 MLOps Workflow Diagram
 
