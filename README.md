@@ -1,4 +1,4 @@
-## 🚀 SurviverFlow – End-to-End MLOps Pipeline for Survival Prediction
+<div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-Web_App-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
@@ -8,7 +8,9 @@
 [![Grafana](https://img.shields.io/badge/Grafana-Dashboard-orange?logo=grafana)](https://grafana.com/)
 [![Blog](https://img.shields.io/badge/Read-Blog-blue?logo=medium)](https://medium.com/@dsdineshnitrr/building-surviverflow-an-end-to-end-mlops-pipeline-with-redis-airflow-prometheus-render-b2f3cb341c14)
 
+</div>
 
+## 🚀 SurviverFlow – End-to-End MLOps Pipeline for Survival Prediction
 **SurviverFlow** is a scalable, production-ready MLOps pipeline that predicts passenger survival using the survival prediction dataset. It covers the entire ML lifecycle—**data ingestion**, **feature storage**, **model training**, **drift detection**, **deployment**, and **monitoring**—with modern tools like Redis, Airflow, Flask, Prometheus, and Render.
 
 ---
