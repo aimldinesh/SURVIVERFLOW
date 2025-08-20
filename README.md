@@ -10,9 +10,12 @@
 
 </div>
 
+<div align="center">
+  
 ## 🚀 SurviverFlow – End-to-End MLOps Pipeline for Survival Prediction
 **SurviverFlow** is a scalable, production-ready MLOps pipeline that predicts passenger survival using the survival prediction dataset. It covers the entire ML lifecycle—**data ingestion**, **feature storage**, **model training**, **drift detection**, **deployment**, and **monitoring**—with modern tools like Redis, Airflow, Flask, Prometheus, and Render.
 
+</div>
 ---
 
 ## 📚 Table of Contents
